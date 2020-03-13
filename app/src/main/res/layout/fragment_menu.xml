@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuFrag">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewResultPhrase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50px"
+            android:gravity="center"
+            android:text="Enter your name"
+            android:textSize="70px" />
+
+        <EditText
+            android:id="@+id/editUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="50px" />
+
+        <Button
+            android:id="@+id/buttonStartQuizz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00BCD4"
+            android:textColorHint="#03A9F4"
+            android:text="5 questions"
+            android:layout_marginBottom="20px"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#00BCD4"
+        android:text="Highscore"
+        android:textColorHint="#03A9F4"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <Button
+        android:id="@+id/buttonAPI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="API Doc"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="429dp"
+        android:backgroundTint="#00BCD4"
+        android:textColorHint="#03A9F4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>

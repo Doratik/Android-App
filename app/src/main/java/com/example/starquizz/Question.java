@@ -30,7 +30,7 @@ public class Question extends AppCompatActivity {
     TextView textViewQuestionNumber, textViewScore, testQuestion;
     RadioGroup radioGroup;
     RadioButton radio1Element, radio2Element, radio3Element;
-    Button buttonValidate, buttonNextQuestion;
+    Button buttonValidate;
     Intent questionsPage, resultIntent, startQuizzIntent;
     String name;
     int CharacterID;
@@ -114,7 +114,7 @@ public class Question extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return getFeature(id, choosenCriteria);
+        return getFeature(randomNum(80)+1, choosenCriteria);
     }
 
     public int randomNum(int number){

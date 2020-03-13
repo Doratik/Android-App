@@ -30,6 +30,14 @@
             android:text="3/5 "
             android:textSize="50px" />
 
+        <Button
+            android:id="@+id/buttonResultBackMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00BCD4"
+            android:textColorHint="#03A9F4"
+            android:text="Back to the menu" />
+
 
     </LinearLayout>
 
