@@ -15,5 +15,6 @@ public class Menu extends AppCompatActivity {
 
         menuFrag = new MenuFrag();
         getSupportFragmentManager().beginTransaction().add(R.id.container, menuFrag).commit();
+
     }
 }

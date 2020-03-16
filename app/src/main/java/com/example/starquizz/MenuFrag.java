@@ -22,7 +22,7 @@ public class MenuFrag extends Fragment {
     Intent startQuizzIntent, launchDocumentation;
     Button buttonStartQuizz, buttonAPI, buttonLeft;
     Uri docUrl;
-    Highscore highscore;
+    HighscoreFrag highscore;
 
     public MenuFrag() {
         // Required empty public constructor
@@ -69,7 +69,7 @@ public class MenuFrag extends Fragment {
         buttonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                highscore = new Highscore();
+                highscore = new HighscoreFrag();
                 getFragmentManager().beginTransaction().replace(R.id.container, highscore).commit();
             }
         });

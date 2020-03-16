@@ -1,9 +1,9 @@
 package com.example.starquizz;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +36,18 @@ public class Result extends AppCompatActivity {
         textViewQuestionNumber = (TextView) findViewById(R.id.textViewResultPhrase);
         textViewQuestionNumber.setText("Good job " + userName + " you did great");
         textViewScore.setText(score + " / " + questionCount);
+
+
+        //azazefnia"efan
+        //List <HighscoreClass> scoreList = new ArrayList<HighscoreClass>();
+        //scoreList.add(new HighscoreClass(userName, score));
+
+        Log.i("BDD autre", String.valueOf(score));
+        HighscoreClass scoreList = new HighscoreClass(0, userName, score);
+        scoreList.save();
+        Log.i("BDD ?", scoreList.userName);
+        //Log.i("BDD ?", String.valueOf(scoreList.score));
+
 
         buttonResultBackMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,10 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -68,9 +66,15 @@ public class Question extends AppCompatActivity {
         goodChoice = choiceList[0];
         Collections.shuffle(Arrays.asList(choiceList)); //pour mettre les réponses au hasard
 
+
+        //on enregirste pour tester persistaancec
+        //HighscoreClass highscoreObj = new HighscoreClass(userName);
+        //highscoreObj.save();
         //textview DE LA BONNE REPONSE POUR AIDER PENDANT LES TESTS
-        testQuestion = (TextView) findViewById(R.id.textViewPourTester);
-        testQuestion.setText(goodChoice);
+        //testQuestion = (TextView) findViewById(R.id.textViewPourTester);
+        //testQuestion.setText(highscoreObj.userName);
+
+
 
         //on met la bonne question dans la text vue
         testQuestion = (TextView) findViewById(R.id.textViewQuestionAsked);
@@ -123,7 +127,7 @@ public class Question extends AppCompatActivity {
             return randomNum(80)+1;
 
         }
-        return new Random().nextInt(number);
+        return number;
     }
 
     public String secondChoice(String choice1, enumCrit criteriaChoosen){
@@ -157,7 +161,7 @@ public class Question extends AppCompatActivity {
             }
             confirmAction(goodChoice);
             questionValidated = true;
-            if (questionCount>4){
+            if (questionCount>1){
                 buttonValidate.setText("Finish");
             }
             else{
@@ -165,7 +169,7 @@ public class Question extends AppCompatActivity {
             }
         }
         else{
-            if(questionCount<5){
+            if(questionCount<2){
                 nextQuestionPage(userName, questionCount+1, score);
             }
             else{
