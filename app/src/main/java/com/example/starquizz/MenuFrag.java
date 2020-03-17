@@ -1,12 +1,9 @@
 package com.example.starquizz;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +13,12 @@ import android.widget.Toast;
 
 public class MenuFrag extends Fragment {
 
-    EditText editUserName ;
     int score;
     int questionCount;
-    Intent startQuizzIntent, launchDocumentation;
-    Button buttonStartQuizz, buttonAPI, buttonLeft;
     Uri docUrl;
+    Button buttonStartQuizz, buttonAPI, buttonLeft;
+    EditText editUserName;
+    Intent startQuizzIntent, launchDocumentation;
     HighscoreFrag highscore;
 
     public MenuFrag() {
@@ -35,7 +32,7 @@ public class MenuFrag extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_menu, container, false);
         buttonStartQuizz = view.findViewById(R.id.buttonStartQuizz);
         buttonAPI = view.findViewById(R.id.buttonAPI);
-        buttonLeft = view.findViewById(R.id.buttonLeft);
+        buttonLeft = view.findViewById(R.id.buttonHistory);
         editUserName = (EditText)view.findViewById(R.id.editUserName);
 
         buttonStartQuizz.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +40,7 @@ public class MenuFrag extends Fragment {
             public void onClick(View v) {
                 score = 0;
                 questionCount = 1;
-                startQuizzIntent = new Intent(getContext(), Question.class);
+                startQuizzIntent = new Intent(getContext(), QuestionActivity.class);
                 startQuizzIntent.putExtra("userName", editUserName.getText().toString());
                 startQuizzIntent.putExtra("questionCount", questionCount);
                 startQuizzIntent.putExtra("score", score);

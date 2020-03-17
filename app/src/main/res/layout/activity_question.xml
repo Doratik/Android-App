@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Question">
+    tools:context=".QuestionActivity">
 
 
 
@@ -78,12 +78,6 @@
             android:text="SCORE"
             android:textSize="40px"
             android:layout_marginTop="50px"/>
-
-        <TextView
-            android:id="@+id/textViewPourTester"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Afficher pseudo pour mes test" />
 
     </LinearLayout>
 

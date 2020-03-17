@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50px"
             android:gravity="center"
-            android:text="Le fragment qui retourne ta daronne"
+            android:text="fragment menu"
             android:textSize="70px" />
 
     </LinearLayout>
@@ -35,15 +35,15 @@
         tools:layout_editor_absoluteY="429dp" />
 
     <Button
-        android:id="@+id/buttonDev"
+        android:id="@+id/buttonErase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Effacer historique"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="429dp"
-        android:backgroundTint="#00BCD4"
-        android:textColorHint="#03A9F4"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:backgroundTint="#00BCD4"
+        android:text="Erase ALL"
+        android:textColorHint="#03A9F4"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="429dp" />
 
 </RelativeLayout>

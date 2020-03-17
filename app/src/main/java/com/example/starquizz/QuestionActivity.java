@@ -1,7 +1,6 @@
 package com.example.starquizz;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,12 +19,11 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class Question extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity {
 
     String userName;
-    int score, questionCount;
-
-    TextView textViewQuestionNumber, textViewScore, testQuestion;
+    int score, questionCount, numberOfQuestion;
+    TextView textViewQuestionNumber, textViewScore, testQuestion, textViewPourTester;
     RadioGroup radioGroup;
     RadioButton radio1Element, radio2Element, radio3Element;
     Button buttonValidate;
@@ -44,15 +42,26 @@ public class Question extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         getSupportActionBar().hide();
 
+        textViewQuestionNumber = (TextView) findViewById(R.id.textViewQuestionNumber);
+        textViewScore = (TextView) findViewById(R.id.textViewScore);
+        testQuestion = (TextView) findViewById(R.id.textViewQuestionAsked);
+        buttonValidate = findViewById(R.id.buttonValidate);
+        radioGroup = findViewById(R.id.radioGroup);
+        radio1Element = findViewById(R.id.radioButton1);
+        radio2Element = findViewById(R.id.radioButton2);
+        radio3Element = findViewById(R.id.radioButton3);
+
+
+        numberOfQuestion = 5;
+
         //on recupere le pseudo, le counter et le score de la page d'accueil
         startQuizzIntent = getIntent();
         userName = startQuizzIntent.getStringExtra("userName");
         score = startQuizzIntent.getIntExtra("score", -404);
         questionCount = startQuizzIntent.getIntExtra("questionCount", -404);
 
-        textViewQuestionNumber = (TextView) findViewById(R.id.textViewQuestionNumber);
-        textViewQuestionNumber.setText("Question: " + questionCount + "/5");
-        textViewScore = (TextView) findViewById(R.id.textViewScore);
+        //on met la question a poser dans la textView
+        textViewQuestionNumber.setText("Question: " + questionCount + "/" + numberOfQuestion);
         textViewScore.setText("Score: " + score);
 
         //On sélectionne le personnage, le critère et les 3 caractèristiques
@@ -66,32 +75,17 @@ public class Question extends AppCompatActivity {
         goodChoice = choiceList[0];
         Collections.shuffle(Arrays.asList(choiceList)); //pour mettre les réponses au hasard
 
-
-        //on enregirste pour tester persistaancec
-        //HighscoreClass highscoreObj = new HighscoreClass(userName);
-        //highscoreObj.save();
-        //textview DE LA BONNE REPONSE POUR AIDER PENDANT LES TESTS
-        //testQuestion = (TextView) findViewById(R.id.textViewPourTester);
-        //testQuestion.setText(highscoreObj.userName);
-
-
-
-        //on met la bonne question dans la text vue
-        testQuestion = (TextView) findViewById(R.id.textViewQuestionAsked);
+        //on met la question à poser à l'utilisateur dans la TextView
         testQuestion.setText(criteriaChoosen.getPhrasePage() + name);
 
         //on met les caractéristiques dans les radiobutton
-        radioGroup = findViewById(R.id.radioGroup);
-        radio1Element = findViewById(R.id.radioButton1);
         radio1Element.setText(choiceList[0]);
-        radio2Element = findViewById(R.id.radioButton2);
         radio2Element.setText(choiceList[1]);
-        radio3Element = findViewById(R.id.radioButton3);
         radio3Element.setText(choiceList[2]);
 
+        //bool pour pouvoir passer à la question suivante
         questionValidated = false;
 
-        buttonValidate = findViewById(R.id.buttonValidate);
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +95,7 @@ public class Question extends AppCompatActivity {
     }
 
     //FONCTIONS:
+
     //requete API pour avoir une caractéristique associée à un critère
     public Pair <String,String> getFeature (int id, enumCrit choosenCriteria){
         try {
@@ -125,7 +120,6 @@ public class Question extends AppCompatActivity {
         number = new Random().nextInt(number);
         if (number == 17){
             return randomNum(80)+1;
-
         }
         return number;
     }
@@ -138,7 +132,6 @@ public class Question extends AppCompatActivity {
             CharacterID = randomNum(80)+1;
             choice2 = getFeature( CharacterID, criteriaChoosen).second;
         }while(choice1.equals(choice2));
-
         return choice2;
     }
 
@@ -149,19 +142,19 @@ public class Question extends AppCompatActivity {
             CharacterID = randomNum(80)+1;
             choice3 = getFeature( CharacterID, criteriaChoosen).second;
         }while((choice1.equals(choice3)) || (choice2.equals(choice3)));
-
         return choice3;
     }
 
+    //bouton pour valider et passer à la prochaine question
     public void buttonValidateFonction(String userName, int score, int questionCount, String goodChoice){
         if (questionValidated == false){
             if(!oneAnwserCheked()){
-                Toast.makeText(Question.this,"Choose an answer",Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuestionActivity.this,"Choose an answer",Toast.LENGTH_SHORT).show();
                 return;
             }
             confirmAction(goodChoice);
             questionValidated = true;
-            if (questionCount>1){
+            if (questionCount>numberOfQuestion-1){
                 buttonValidate.setText("Finish");
             }
             else{
@@ -169,7 +162,7 @@ public class Question extends AppCompatActivity {
             }
         }
         else{
-            if(questionCount<2){
+            if(questionCount<numberOfQuestion){
                 nextQuestionPage(userName, questionCount+1, score);
             }
             else{
@@ -179,7 +172,7 @@ public class Question extends AppCompatActivity {
     }
 
     public void nextQuestionPage(String userName, int questionCount, int score){
-        questionsPage = new Intent(getApplicationContext(), Question.class);
+        questionsPage = new Intent(getApplicationContext(), QuestionActivity.class);
         questionsPage.putExtra("userName", userName);
         questionsPage.putExtra("questionCount", questionCount);
         questionsPage.putExtra("score", score);
@@ -187,7 +180,7 @@ public class Question extends AppCompatActivity {
     }
 
     public void resultPage (String userName, int questionCount, int score){
-        resultIntent = new Intent(getApplicationContext(), Result.class);
+        resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
         resultIntent.putExtra("userName", userName);
         resultIntent.putExtra("questionCount", questionCount);
         resultIntent.putExtra("score", score);
@@ -200,6 +193,7 @@ public class Question extends AppCompatActivity {
         radio3Element.setEnabled(false);
     }
 
+    //Pour mettre à jour le score et afficher la correction
     public void confirmAction(String goodChoice) {
 
         if ((radio1Element.isChecked()) && (radio1Element.getText().toString() == goodChoice)){
@@ -232,11 +226,9 @@ public class Question extends AppCompatActivity {
 
     public boolean oneAnwserCheked(){
         if ((radio1Element.isChecked()) || (radio2Element.isChecked()) || (radio3Element.isChecked())){
-            Log.i("VERI_FFCT", "Vrai");
             return true;
         }
         else {
-            Log.i("VERI_FFCT", "Faux, cyprien");
             return false;
         }
     }
